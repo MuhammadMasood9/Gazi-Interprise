@@ -179,7 +179,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose }) => {
             </div>
             
             <div>
-              <label className="block text-xs sm:text-sm font-semibold text-slate-700 mb-1.5">Organization / Hospital</label>
+              <label className="block text-xs sm:text-sm font-semibold text-slate-700 mb-1.5">Organization</label>
               <input 
                 type="text" 
                 name="organization"

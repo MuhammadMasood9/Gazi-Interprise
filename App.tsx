@@ -24,10 +24,10 @@ const App: React.FC = () => {
       <main>
         <Hero />
         <TrustedPartners />
+        <Products />
         <Features />
         <AboutSection />
         <Stats />
-        <Products />
         <Process />
         <Testimonials />
         <CTA onOpenQuote={openQuoteModal} />
