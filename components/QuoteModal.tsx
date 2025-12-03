@@ -19,10 +19,11 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
-  // EmailJS Configuration - Replace these with your EmailJS credentials
-  // Get these from https://www.emailjs.com/
-  // Create a .env file in the root directory with these variables:
-  // VITE_EMAILJS_SERVICE_ID=your_service_id
+  // EmailJS Configuration with Hostinger SMTP
+  // Configure EmailJS to use Hostinger SMTP (smtp.hostinger.com)
+  // See HOSTINGER_EMAILJS_SETUP.md for detailed instructions
+  // Create a .env file with:
+  // VITE_EMAILJS_SERVICE_ID=your_hostinger_service_id
   // VITE_EMAILJS_TEMPLATE_ID=your_template_id
   // VITE_EMAILJS_PUBLIC_KEY=your_public_key
   const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID';
@@ -54,10 +55,12 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose }) => {
       return;
     }
 
-    // Send email to masoodfootball@gmail.com (not to the user who submitted)
-    // IMPORTANT: In your EmailJS template settings, set "To Email" field to: masoodfootball@gmail.com
-    // DO NOT use {{user_email}} in the "To Email" field, or emails will go to the form submitter instead of you
-    // The hidden input "to_email" below is available in template as {{to_email}} if you want to use it
+    // Send email using Hostinger SMTP via EmailJS
+    // IMPORTANT: In your EmailJS template settings:
+    // - "To Email" must be: masoodfootball@gmail.com (where you receive quotes)
+    // - "From Email" should be: info@ghazi-enterprises.com (your Hostinger email)
+    // - "Reply To" should be: {{user_email}} (customer's email for replies)
+    // DO NOT use {{user_email}} in "To Email" field!
     emailjs
       .sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, form.current, {
         publicKey: EMAILJS_PUBLIC_KEY,
